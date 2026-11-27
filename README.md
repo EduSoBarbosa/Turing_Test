@@ -4,7 +4,8 @@
 
 **Course:** Multiplatform Software Development — FATEC Luigi Papaiz
 **Integrated Project (PI) — P2 presentation:** November 27
-**Team:** _[Member 1, Member 2, Member 3, ...]_
+
+**Team:** Eduardo De Sousa Barbosa, Gabriel Sheldes Ferreira Arantes, Guilherme Marinho Pozati Correa, Julia Lins Pereira da Silva e Marcos Vinicius Martins Dos Santos
 
 ---
 
