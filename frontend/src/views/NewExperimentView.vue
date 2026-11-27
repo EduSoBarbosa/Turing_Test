@@ -9,33 +9,33 @@ import AppSidebar from '@/components/AppSidebar.vue'
 const QUESTION_COUNT = 10
 const ESTIMATED_TIME = '~10 min'
 
-const steps = ['Escolha', 'Respostas', 'Julgamento', 'Resultado']
+const steps = ['Choose', 'Responses', 'Judgment', 'Results']
 const currentStep = 1
 
 const howItWorks = [
   {
-    title: 'Você responde',
-    text: `Escreva com suas próprias palavras as respostas para ${QUESTION_COUNT} perguntas sobre experiências, opiniões e emoções.`
+    title: 'You answer',
+    text: `Write answers in your own words to ${QUESTION_COUNT} questions about experiences, opinions, and emotions.`
   },
   {
-    title: 'A IA responde também',
-    text: 'Enquanto você escreve, uma inteligência artificial responde às mesmas perguntas, ao mesmo tempo.'
+    title: 'AI answers too',
+    text: 'While you write, an AI answers the same questions.'
   },
   {
-    title: 'Você julga',
-    text: 'Para cada pergunta, você verá duas respostas embaralhadas e vai apontar qual foi escrita por um humano.'
+    title: 'You judge',
+    text: 'For each question, you will see two responses in shuffled order and choose the one a person wrote.'
   },
   {
-    title: 'Você vê o resultado',
-    text: 'No final, descobre seus acertos e erros e quais respostas eram de quem.'
+    title: 'You see your results',
+    text: 'See who wrote each response and which ones you identified correctly.'
   }
 ]
 
 const tips = [
-  'Não existe resposta certa ou errada. Escreva do seu jeito.',
-  'Não copie de outras fontes nem use outra IA. Isso estraga o experimento.',
-  'Cada resposta precisa ter pelo menos 10 caracteres.',
-  'Você só avança quando você e a IA terminarem todas as perguntas.'
+  'There are no right or wrong answers. Write in your own words.',
+  'Use your own writing and avoid copying from other sources or using AI.',
+  'Each response must be at least 10 characters long.',
+  'You can continue once you and the AI have answered every question.'
 ]
 
 /* ========================================
@@ -65,7 +65,7 @@ function start() {
       <header class="topbar">
 
         <div class="breadcrumb">
-          Experimento / Novo / <strong>Instruções</strong>
+          Experiment / New / <strong>Instructions</strong>
         </div>
 
         <ol class="steps">
@@ -92,13 +92,12 @@ function start() {
       <!-- BODY -->
       <section class="body">
 
-        <span class="eyebrow">NOVO EXPERIMENTO</span>
+        <span class="eyebrow">NEW EXPERIMENT</span>
 
-        <h1>Antes de começar</h1>
+        <h1>Before you begin</h1>
 
         <p class="lead">
-          Você será o avaliador deste experimento. Entenda como funciona
-          e depois comece a responder.
+          You will judge the responses in this experiment. Here is how it works.
         </p>
 
         <div class="layout">
@@ -106,7 +105,7 @@ function start() {
           <div class="main-col">
 
             <!-- HOW IT WORKS -->
-            <h2 class="section-title">Como funciona</h2>
+            <h2 class="section-title">How it works</h2>
 
             <ol class="how">
               <li
@@ -126,7 +125,7 @@ function start() {
             <!-- TIPS -->
             <div class="tips">
 
-              <h2 class="section-title">Para o experimento funcionar</h2>
+              <h2 class="section-title">Participation guidelines</h2>
 
               <ul>
                 <li v-for="tip in tips" :key="tip">
@@ -142,30 +141,30 @@ function start() {
           <!-- SUMMARY -->
           <aside class="summary">
 
-            <h3>Resumo</h3>
+            <h3>Summary</h3>
 
             <dl>
               <div>
-                <dt>Perguntas</dt>
+                <dt>Questions</dt>
                 <dd>{{ QUESTION_COUNT }}</dd>
               </div>
               <div>
-                <dt>Tempo estimado</dt>
+                <dt>Estimated time</dt>
                 <dd>{{ ESTIMATED_TIME }}</dd>
               </div>
               <div>
-                <dt>Participantes</dt>
-                <dd>Você + IA</dd>
+                <dt>Participants</dt>
+                <dd>You + AI</dd>
               </div>
             </dl>
 
             <button class="cta" @click="start">
-              Começar a responder
+              Start answering
               <span aria-hidden="true">→</span>
             </button>
 
             <button class="ghost" @click="router.push('/quiz')">
-              <span aria-hidden="true">←</span> Voltar
+              <span aria-hidden="true">←</span> Back
             </button>
 
           </aside>

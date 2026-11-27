@@ -4,28 +4,28 @@ import AppSidebar from '@/components/AppSidebar.vue'
 
 const router = useRouter()
 
-const steps = ['Escolha', 'Respostas', 'Julgamento', 'Resultado']
+const steps = ['Choose', 'Responses', 'Judgment', 'Results']
 const currentStep = 0
 
 const options = [
   {
     id: 'novo',
-    title: 'Novo experimento',
+    title: 'New experiment',
     description:
-      'Responda às perguntas do zero. Sua resposta humana é pareada com uma resposta gerada por IA para o julgamento.',
-    tags: ['Humano + IA', 'Respostas novas', '~10 min'],
-    action: 'Começar novo experimento',
+      'Answer the questions from scratch. Each of your responses is paired with an AI response for judging.',
+    tags: ['Human + AI', 'New responses', '~10 min'],
+    action: 'Start a new experiment',
     href: '/quiz/novo/perguntas',
     recommended: true,
     variant: 'green'
   },
   {
     id: 'prontos',
-    title: 'Questionários prontos',
+    title: 'Ready-made questionnaires',
     description:
-      'Escolha um conjunto já respondido e vá direto para a etapa de julgamento, sem precisar responder nada.',
-    tags: ['Respostas armazenadas', 'Direto ao julgamento', '~5 min'],
-    action: 'Ver questionários',
+      'Choose a completed questionnaire and go straight to judging.',
+    tags: ['Saved responses', 'Go straight to judging', '~5 min'],
+    action: 'Browse questionnaires',
     href: '/questionarios',
     recommended: false,
     variant: 'pink'
@@ -48,7 +48,7 @@ const goTo = (href: string) => {
       <header class="topbar">
 
         <div class="breadcrumb">
-          Experimento / <strong>Escolha</strong>
+          Experiment / <strong>Choose</strong>
         </div>
 
         <ol class="steps">
@@ -75,13 +75,12 @@ const goTo = (href: string) => {
       <!-- BODY -->
       <section class="body">
 
-        <span class="eyebrow">PASSO 1 DE 4</span>
+        <span class="eyebrow">STEP 1 OF 4</span>
 
-        <h1>Como deseja participar?</h1>
+        <h1>How would you like to take part?</h1>
 
         <p class="lead">
-          Escolha entre responder as perguntas do zero ou julgar
-          um conjunto de respostas que já foi preenchido.
+          Answer the questions yourself or judge an existing set of responses.
         </p>
 
         <div class="cards">
@@ -94,7 +93,7 @@ const goTo = (href: string) => {
           >
 
             <span v-if="option.recommended" class="recommended">
-              RECOMENDADO
+              RECOMMENDED
             </span>
 
             <div class="badge">

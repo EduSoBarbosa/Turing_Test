@@ -30,7 +30,7 @@ const MIN_CHARS = 10
 // (evita que a pessoa seja influenciada pela resposta da IA enquanto escreve)
 const SHOW_AI_TEXT = true
 
-const steps = ['Escolha', 'Respostas', 'Julgamento', 'Resultado']
+const steps = ['Choose', 'Responses', 'Judgment', 'Results']
 const currentStep = 1
 
 /* ========================================
@@ -47,16 +47,16 @@ async function fetchQuestions(): Promise<Question[]> {
   await sleep(600)
 
   return [
-    { id: 1, text: 'Qual é uma lembrança da sua infância que você nunca esqueceu?' },
-    { id: 2, text: 'Como você reage quando alguém discorda de você?' },
-    { id: 3, text: 'Descreva um dia em que você ficou muito frustrado(a).' },
-    { id: 4, text: 'O que te faz sentir mais em paz?' },
-    { id: 5, text: 'Qual foi a última vez que você mudou de opinião sobre algo importante?' },
-    { id: 6, text: 'Qual é o seu maior medo e por quê?' },
-    { id: 7, text: 'Conte sobre uma pessoa que marcou a sua vida.' },
-    { id: 8, text: 'O que você faria se tivesse um dia livre sem nenhuma obrigação?' },
-    { id: 9, text: 'Qual foi o melhor conselho que você já recebeu?' },
-    { id: 10, text: 'Como você imagina a sua vida daqui a dez anos?' }
+    { id: 1, text: 'What is a childhood memory that has stayed with you?' },
+    { id: 2, text: 'How do you react when someone disagrees with you?' },
+    { id: 3, text: 'Describe a day when you felt really frustrated.' },
+    { id: 4, text: 'What makes you feel most at peace?' },
+    { id: 5, text: 'When was the last time you changed your mind about something important?' },
+    { id: 6, text: 'What is your biggest fear, and why?' },
+    { id: 7, text: 'Tell us about someone who made a lasting impression on you.' },
+    { id: 8, text: 'What would you do with a day off and no obligations?' },
+    { id: 9, text: 'What is the best advice you have ever received?' },
+    { id: 10, text: 'How do you imagine your life ten years from now?' }
   ]
 }
 
@@ -72,7 +72,7 @@ async function fetchAiAnswer(question: Question): Promise<string> {
 
   await sleep(2000 + Math.random() * 5000)
 
-  return `Resposta simulada da IA para: "${question.text}"`
+  return `Simulated AI response to: "${question.text}"`
 }
 
 /* ========================================
@@ -157,23 +157,23 @@ const canContinue = computed(
 const plural = (n: number, one: string, many: string) => (n === 1 ? one : many)
 
 const statusMessage = computed(() => {
-  if (canContinue.value) return 'Tudo pronto! Você já pode continuar.'
+  if (canContinue.value) return 'All set! You can continue.'
 
   const parts: string[] = []
 
   const missing = total.value - humanDoneCount.value
   if (missing > 0) {
     parts.push(
-      `Faltam ${missing} ${plural(missing, 'resposta sua', 'respostas suas')}`
+      `${missing} of your ${plural(missing, 'response', 'responses')} still needed`
     )
   }
 
   if (aiPendingCount.value > 0) {
-    parts.push(`IA respondendo ${aiPendingCount.value} ${plural(aiPendingCount.value, 'pergunta', 'perguntas')}`)
+    parts.push(`AI answering ${aiPendingCount.value} ${plural(aiPendingCount.value, 'question', 'questions')}`)
   }
 
   if (aiErrorCount.value > 0) {
-    parts.push(`${aiErrorCount.value} ${plural(aiErrorCount.value, 'erro', 'erros')} na IA`)
+    parts.push(`${aiErrorCount.value} AI ${plural(aiErrorCount.value, 'response failed', 'responses failed')}`)
   }
 
   return parts.join(' · ')
@@ -214,7 +214,7 @@ function goNext() {
       <header class="topbar">
 
         <div class="breadcrumb">
-          Experimento / Novo / <strong>Respostas</strong>
+          Experiment / New / <strong>Responses</strong>
         </div>
 
         <ol class="steps">
@@ -241,24 +241,23 @@ function goNext() {
       <!-- BODY -->
       <section class="body">
 
-        <span class="eyebrow">PASSO 2 DE 4</span>
+        <span class="eyebrow">STEP 2 OF 4</span>
 
-        <h1>Responda às perguntas</h1>
+        <h1>Answer the questions</h1>
 
         <p class="lead">
-          Escreva suas respostas à esquerda. A IA responde às mesmas
-          perguntas à direita, ao mesmo tempo.
+          Write your responses on the left. The AI answers the same questions on the right.
         </p>
 
         <!-- LOADING / ERROR DA PÁGINA -->
         <div v-if="pageStatus === 'loading'" class="page-state">
           <span class="spinner" aria-hidden="true" />
-          Carregando perguntas…
+          Loading questions…
         </div>
 
         <div v-else-if="pageStatus === 'error'" class="page-state">
-          Não foi possível carregar as perguntas.
-          <button class="retry" @click="init">Tentar novamente</button>
+          Could not load the questions.
+          <button class="retry" @click="init">Try again</button>
         </div>
 
         <template v-else>
@@ -271,7 +270,7 @@ function goNext() {
                 <circle cx="12" cy="8" r="4" />
                 <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />
               </svg>
-              <span>VOCÊ · HUMANO</span>
+              <span>YOU · HUMAN</span>
               <b>{{ humanDoneCount }}/{{ total }}</b>
             </div>
 
@@ -280,7 +279,7 @@ function goNext() {
                 <rect x="5" y="7" width="14" height="12" rx="3" />
                 <path d="M12 3v4M9 13h.01M15 13h.01M9 16h6" />
               </svg>
-              <span>INTELIGÊNCIA ARTIFICIAL</span>
+              <span>ARTIFICIAL INTELLIGENCE</span>
               <b>{{ aiDoneCount }}/{{ total }}</b>
             </div>
 
@@ -295,7 +294,7 @@ function goNext() {
 
             <header class="question-head">
               <span class="question-number">
-                PERGUNTA {{ String(index + 1).padStart(2, '0') }}
+                QUESTION {{ String(index + 1).padStart(2, '0') }}
               </span>
               <h2>{{ q.text }}</h2>
             </header>
@@ -307,21 +306,21 @@ function goNext() {
 
                 <textarea
                   v-model="humanAnswers[q.id]"
-                  :aria-label="`Sua resposta para: ${q.text}`"
-                  placeholder="Escreva sua resposta com suas próprias palavras…"
+                  :aria-label="`Your response to: ${q.text}`"
+                  placeholder="Write your response in your own words…"
                   rows="5"
                 />
 
                 <div class="cell-foot">
                   <span class="counter">
-                    {{ humanAnswers[q.id].trim().length }} caracteres
+                    {{ humanAnswers[q.id].trim().length }} characters
                     <template v-if="!isHumanDone(q.id)">
-                      · mín. {{ MIN_CHARS }}
+                      · min. {{ MIN_CHARS }}
                     </template>
                   </span>
 
                   <span v-if="isHumanDone(q.id)" class="done-tag green">
-                    ✓ Respondida
+                    ✓ Answered
                   </span>
                 </div>
 
@@ -346,7 +345,7 @@ function goNext() {
 
                   <span class="ai-hint">
                     <span class="dots" aria-hidden="true"><i /><i /><i /></span>
-                    IA está respondendo…
+                    AI is responding…
                   </span>
                 </div>
 
@@ -355,9 +354,9 @@ function goNext() {
                   v-else-if="aiAnswers[q.id]?.status === 'error'"
                   class="ai-error"
                 >
-                  <p>Não foi possível obter a resposta da IA.</p>
+                  <p>Could not get an AI response.</p>
                   <button class="retry" @click="requestAi(q)">
-                    Tentar novamente
+                    Try again
                   </button>
                 </div>
 
@@ -367,12 +366,12 @@ function goNext() {
                     {{ aiAnswers[q.id]?.text }}
                   </p>
                   <p v-else class="ai-text muted">
-                    A IA já respondeu esta pergunta.
+                    The AI has answered this question.
                   </p>
 
                   <div class="cell-foot">
                     <span />
-                    <span class="done-tag pink">✓ Respondida</span>
+                    <span class="done-tag pink">✓ Answered</span>
                   </div>
                 </div>
 
@@ -397,11 +396,11 @@ function goNext() {
         <button
           class="continue-button"
           :disabled="!canContinue"
-          :title="canContinue ? '' : 'Disponível quando você e a IA terminarem todas as respostas'"
+          :title="canContinue ? '' : 'Available after you and the AI have answered all questions'"
           @click="goNext"
         >
-          Continuar
-          <span aria-hidden="true">→</span>
+          Continue
+<span aria-hidden="true">→</span>
         </button>
 
       </footer>

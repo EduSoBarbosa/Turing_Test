@@ -43,22 +43,22 @@ async function fetchQuestionnaire(
 
   return {
     id,
-    title: 'Memórias e emoções',
+    title: 'Memories and emotions',
     description:
-      'Perguntas sobre lembranças, sentimentos e experiências pessoais. Cada pergunta tem uma resposta escrita por um humano e outra gerada por uma IA.',
-    theme: 'Emoções',
+      'Questions about memories, feelings, and personal experiences. Each question has one response from a person and one from AI.',
+    theme: 'Emotions',
     createdAt: '2026-11-10',
     questions: [
-      { id: 1, text: 'Qual é uma lembrança da sua infância que você nunca esqueceu?' },
-      { id: 2, text: 'Como você reage quando alguém discorda de você?' },
-      { id: 3, text: 'Descreva um dia em que você ficou muito frustrado(a).' },
-      { id: 4, text: 'O que te faz sentir mais em paz?' },
-      { id: 5, text: 'Qual foi a última vez que você mudou de opinião sobre algo importante?' },
-      { id: 6, text: 'Qual é o seu maior medo e por quê?' },
-      { id: 7, text: 'Conte sobre uma pessoa que marcou a sua vida.' },
-      { id: 8, text: 'O que você faria se tivesse um dia livre sem nenhuma obrigação?' },
-      { id: 9, text: 'Qual foi o melhor conselho que você já recebeu?' },
-      { id: 10, text: 'Como você imagina a sua vida daqui a dez anos?' }
+      { id: 1, text: 'What is a childhood memory that has stayed with you?' },
+      { id: 2, text: 'How do you react when someone disagrees with you?' },
+      { id: 3, text: 'Describe a day when you felt really frustrated.' },
+      { id: 4, text: 'What makes you feel most at peace?' },
+      { id: 5, text: 'When was the last time you changed your mind about something important?' },
+      { id: 6, text: 'What is your biggest fear, and why?' },
+      { id: 7, text: 'Tell us about someone who made a lasting impression on you.' },
+      { id: 8, text: 'What would you do with a day off and no obligations?' },
+      { id: 9, text: 'What is the best advice you have ever received?' },
+      { id: 10, text: 'How do you imagine your life ten years from now?' }
     ]
   }
 }
@@ -99,7 +99,7 @@ watch(() => route.params.id, load, { immediate: true })
 const formattedDate = computed(() =>
   questionnaire.value
     ? new Date(questionnaire.value.createdAt + 'T00:00:00').toLocaleDateString(
-        'pt-BR',
+        'en-US',
         { day: '2-digit', month: 'long', year: 'numeric' }
       )
     : ''
@@ -132,9 +132,9 @@ const startJudgment = () => {
       <header class="topbar">
 
         <div class="breadcrumb">
-          <a href="/questionarios" @click.prevent="goBack">Questionários</a>
+          <a href="/questionarios" @click.prevent="goBack">Questionnaires</a>
           /
-          <strong>{{ questionnaire?.title ?? 'Detalhes' }}</strong>
+          <strong>{{ questionnaire?.title ?? 'Details' }}</strong>
         </div>
 
       </header>
@@ -142,7 +142,7 @@ const startJudgment = () => {
       <section class="body">
 
         <button class="back" @click="goBack">
-          <span aria-hidden="true">←</span> Voltar para a biblioteca
+          <span aria-hidden="true">←</span> Back to the library
         </button>
 
         <!-- LOADING -->
@@ -163,15 +163,15 @@ const startJudgment = () => {
 
         <!-- NOT FOUND / ERROR -->
         <div v-else-if="status === 'notfound'" class="state">
-          <p>Questionário não encontrado.</p>
+          <p>Questionnaire not found.</p>
           <button class="outline" @click="goBack">
-            Voltar para a biblioteca
+            Back to the library
           </button>
         </div>
 
         <div v-else-if="status === 'error'" class="state">
-          <p>Não foi possível carregar este questionário.</p>
-          <button class="outline" @click="load">Tentar novamente</button>
+          <p>Could not load this questionnaire.</p>
+          <button class="outline" @click="load">Try again</button>
         </div>
 
         <!-- READY -->
@@ -187,8 +187,8 @@ const startJudgment = () => {
             <p class="lead">{{ questionnaire.description }}</p>
 
             <h2 class="section-title">
-              Perguntas
-              <span>{{ questionnaire.questions.length }}</span>
+              Questions
+<span>{{ questionnaire.questions.length }}</span>
             </h2>
 
             <ol class="questions">
@@ -209,43 +209,43 @@ const startJudgment = () => {
           <!-- SUMMARY -->
           <aside class="summary">
 
-            <h3>Resumo</h3>
+            <h3>Summary</h3>
 
             <dl>
               <div>
-                <dt>Perguntas</dt>
+                <dt>Questions</dt>
                 <dd>{{ questionnaire.questions.length }}</dd>
               </div>
               <div>
-                <dt>Respostas por pergunta</dt>
-                <dd>2 (humano + IA)</dd>
+                <dt>Responses per question</dt>
+                <dd>2 (human + AI)</dd>
               </div>
               <div>
-                <dt>Criado em</dt>
+                <dt>Created on</dt>
                 <dd>{{ formattedDate }}</dd>
               </div>
               <div>
-                <dt>Tempo estimado</dt>
+                <dt>Estimated time</dt>
                 <dd>~5 min</dd>
               </div>
             </dl>
 
             <div class="how">
-              <span class="how-title">COMO FUNCIONA</span>
+              <span class="how-title">HOW IT WORKS</span>
               <ol>
-                <li>Você lê as duas respostas de cada pergunta.</li>
-                <li>Aponta qual foi escrita pelo humano.</li>
-                <li>No fim, vê seus acertos e erros.</li>
+                <li>Read both responses to each question.</li>
+                <li>Choose the one a person wrote.</li>
+                <li>See how many you identified correctly.</li>
               </ol>
             </div>
 
             <button class="cta" @click="startJudgment">
-              Iniciar julgamento
+              Start judging
               <span aria-hidden="true">→</span>
             </button>
 
             <small>
-              A origem das respostas só é revelada no resultado final.
+              The results reveal who wrote each response.
             </small>
 
           </aside>

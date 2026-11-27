@@ -40,7 +40,7 @@ const FINALIZED_KEY = 'eliza:finalized'
 
 const LABELS: Choice[] = ['A', 'B']
 
-const steps = ['Escolha', 'Respostas', 'Julgamento', 'Resultado']
+const steps = ['Choose', 'Responses', 'Judgment', 'Results']
 const currentStep = 3
 
 /* ========================================
@@ -118,28 +118,28 @@ const verdict = computed(() => {
 
   if (p >= 80) {
     return {
-      title: 'Olho afiado',
-      text: 'Você identificou a maioria das respostas humanas. Desta vez, a IA teve dificuldade em te enganar.'
+      title: 'Keen eye',
+      text: 'You identified most of the human responses. This time, the AI rarely fooled you.'
     }
   }
 
   if (p >= 60) {
     return {
-      title: 'Bom faro',
-      text: 'Você acertou mais do que errou, mas a IA conseguiu se passar por humana algumas vezes.'
+      title: 'Good instincts',
+      text: 'You got more right than wrong, though some AI responses seemed human.'
     }
   }
 
   if (p >= 40) {
     return {
-      title: 'Na zona cinzenta',
-      text: 'Seu resultado ficou perto do acaso. Para essa IA, a diferença entre humano e máquina quase não apareceu na escrita.'
+      title: 'Close to chance',
+      text: 'Your score was close to chance. It was hard to tell which responses were written by a person.'
     }
   }
 
   return {
-    title: 'A IA te enganou',
-    text: 'Você marcou mais respostas da IA como humanas do que o contrário. É exatamente isso que o experimento quer provocar.'
+    title: 'The AI fooled you',
+    text: 'You picked the AI response as human more often than you picked the human response.'
   }
 })
 
@@ -165,9 +165,9 @@ const visible = computed(() => {
 })
 
 const filters = computed(() => [
-  { id: 'all' as const, label: 'Todas', count: total.value },
-  { id: 'correct' as const, label: 'Acertos', count: correctCount.value },
-  { id: 'wrong' as const, label: 'Erros', count: wrongCount.value }
+  { id: 'all' as const, label: 'All', count: total.value },
+  { id: 'correct' as const, label: 'Correct', count: correctCount.value },
+  { id: 'wrong' as const, label: 'Incorrect', count: wrongCount.value }
 ])
 
 const isOpen = (index: number) => openRows.value.includes(index)
@@ -225,7 +225,7 @@ function openLibrary() {
       <div class="brand">
         <img
           src="../assets/eliza-logo.png"
-          alt="Logo ELIZA"
+          alt="ELIZA logo"
           class="brand-logo"
         />
         <span class="brand-name">ELIZA</span>
@@ -257,26 +257,26 @@ function openLibrary() {
       <!-- LOADING -->
       <div v-if="status === 'loading'" class="state" role="status">
         <span class="spinner" aria-hidden="true" />
-        Carregando resultado…
+        Loading results…
       </div>
 
       <!-- EMPTY / SEM ACESSO -->
       <div v-else-if="status === 'empty'" class="state column">
-        <p>Nenhum resultado disponível. Finalize um julgamento primeiro.</p>
+        <p>No results yet. Submit a judgment first.</p>
         <button class="outline" @click="router.push('/quiz')">
-          Escolher um experimento
+          Choose an experiment
         </button>
       </div>
 
       <!-- READY -->
       <template v-else>
 
-        <span class="eyebrow">RESULTADO FINAL</span>
+        <span class="eyebrow">FINAL RESULTS</span>
 
         <!-- HERO -->
         <section class="hero">
 
-          <div class="score" role="img" :aria-label="`${correctCount} acertos em ${total} perguntas`">
+          <div class="score" role="img" :aria-label="`${correctCount} correct out of ${total} questions`">
 
             <svg viewBox="0 0 180 180" aria-hidden="true">
               <defs>
@@ -305,7 +305,7 @@ function openLibrary() {
 
             <div class="score-center">
               <strong>{{ correctCount }}<small>/{{ total }}</small></strong>
-              <span>{{ percent }}% de acertos</span>
+              <span>{{ percent }}% correct</span>
             </div>
 
           </div>
@@ -317,22 +317,21 @@ function openLibrary() {
             <p class="verdict">{{ verdict.text }}</p>
 
             <ul class="chips">
-              <li class="chip good">✓ {{ correctCount }} {{ correctCount === 1 ? 'acerto' : 'acertos' }}</li>
-              <li class="chip bad">✕ {{ wrongCount }} {{ wrongCount === 1 ? 'erro' : 'erros' }}</li>
+              <li class="chip good">✓ {{ correctCount }} {{ correctCount === 1 ? 'correct answer' : 'correct answers' }}</li>
+              <li class="chip bad">✕ {{ wrongCount }} {{ wrongCount === 1 ? 'incorrect answer' : 'incorrect answers' }}</li>
             </ul>
 
             <p class="note">
-              Com duas opções por pergunta, chutar ao acaso rende cerca de 50%
-              de acertos. Quanto mais perto disso, mais a IA se parece com uma pessoa.
+              With two choices per question, random guesses average about 50% correct.
             </p>
 
             <div class="hero-actions">
               <button class="primary" @click="newExperiment">
-                Fazer novo experimento <span aria-hidden="true">→</span>
+                Start a new experiment <span aria-hidden="true">→</span>
               </button>
 
               <button class="ghost" @click="openLibrary">
-                Ver questionários
+                Browse questionnaires
               </button>
             </div>
 
@@ -345,11 +344,11 @@ function openLibrary() {
 
           <div class="review-head">
 
-            <h2>Revisão das respostas</h2>
+            <h2>Review responses</h2>
 
             <div class="review-tools">
 
-              <div class="tabs" role="tablist" aria-label="Filtrar perguntas">
+              <div class="tabs" role="tablist" aria-label="Filter questions">
                 <button
                   v-for="f in filters"
                   :key="f.id"
@@ -364,7 +363,7 @@ function openLibrary() {
               </div>
 
               <button class="link" @click="toggleAll">
-                {{ allOpen ? 'Recolher todas' : 'Expandir todas' }}
+                {{ allOpen ? 'Collapse all' : 'Expand all' }}
               </button>
 
             </div>
@@ -372,7 +371,7 @@ function openLibrary() {
           </div>
 
           <p v-if="visible.length === 0" class="empty-filter">
-            Nenhuma pergunta nesta categoria.
+            No questions in this category.
           </p>
 
           <ol v-else class="rows">
@@ -397,7 +396,7 @@ function openLibrary() {
                 <span class="row-question">{{ r.item.question }}</span>
 
                 <span class="badge" :class="r.correct ? 'good' : 'bad'">
-                  {{ r.correct ? '✓ Acertou' : '✕ Errou' }}
+                  {{ r.correct ? '✓ Correct' : '✕ Incorrect' }}
                 </span>
 
                 <span class="chevron" aria-hidden="true">▾</span>
@@ -415,12 +414,12 @@ function openLibrary() {
 
                   <div class="ans-head">
                     <span class="ans-label">
-                      RESPOSTA {{ label }} ·
-                      {{ originOf(r, label) === 'human' ? 'HUMANA' : 'IA' }}
+                      RESPONSE {{ label }} ·
+                      {{ originOf(r, label) === 'human' ? 'HUMAN' : 'AI' }}
                     </span>
 
                     <span v-if="r.choice === label" class="picked">
-                      Sua escolha
+                      Your choice
                     </span>
                   </div>
 

@@ -32,33 +32,33 @@ async function fetchQuestionnaires(): Promise<Questionnaire[]> {
   return [
     {
       id: 1,
-      title: 'Memórias e emoções',
-      description: 'Perguntas sobre lembranças, sentimentos e experiências pessoais.',
-      theme: 'Emoções',
+      title: 'Memories and emotions',
+      description: 'Questions about memories, feelings, and personal experiences.',
+      theme: 'Emotions',
       questionCount: 10,
       createdAt: '2026-11-10'
     },
     {
       id: 2,
-      title: 'Opiniões do dia a dia',
-      description: 'Posicionamentos e escolhas em situações cotidianas.',
-      theme: 'Cotidiano',
+      title: 'Everyday opinions',
+      description: 'Opinions and choices in everyday situations.',
+      theme: 'Everyday life',
       questionCount: 10,
       createdAt: '2026-11-14'
     },
     {
       id: 3,
-      title: 'Dilemas e decisões',
-      description: 'Como as pessoas lidam com conflitos, dúvidas e mudanças de opinião.',
-      theme: 'Dilemas',
+      title: 'Dilemmas and decisions',
+      description: 'How people handle conflict, uncertainty, and changes of mind.',
+      theme: 'Dilemmas',
       questionCount: 10,
       createdAt: '2026-11-18'
     },
     {
       id: 4,
-      title: 'Futuro e tecnologia',
-      description: 'Expectativas, medos e curiosidades sobre o que vem pela frente.',
-      theme: 'Tecnologia',
+      title: 'The future and technology',
+      description: 'Hopes, fears, and questions about what lies ahead.',
+      theme: 'Technology',
       questionCount: 10,
       createdAt: '2026-11-22'
     }
@@ -101,7 +101,7 @@ const filtered = computed(() => {
 })
 
 const formatDate = (iso: string) =>
-  new Date(iso + 'T00:00:00').toLocaleDateString('pt-BR', {
+  new Date(iso + 'T00:00:00').toLocaleDateString('en-US', {
     day: '2-digit',
     month: 'short',
     year: 'numeric'
@@ -122,20 +122,19 @@ const openDetails = (id: number | string) => {
       <!-- TOP BAR -->
       <header class="topbar">
         <div class="breadcrumb">
-          Biblioteca / <strong>Questionários</strong>
+          Library / <strong>Questionnaires</strong>
         </div>
       </header>
 
       <!-- BODY -->
       <section class="body">
 
-        <span class="eyebrow">BIBLIOTECA</span>
+        <span class="eyebrow">LIBRARY</span>
 
-        <h1>Questionários prontos</h1>
+        <h1>Ready-made questionnaires</h1>
 
         <p class="lead">
-          Escolha um conjunto já respondido por um humano e por uma IA
-          e vá direto para a etapa de julgamento.
+          Choose a set of questions already answered by a person and an AI, then go straight to judging.
         </p>
 
         <!-- SEARCH -->
@@ -149,14 +148,14 @@ const openDetails = (id: number | string) => {
             <input
               v-model="search"
               type="search"
-              placeholder="Buscar por título, tema ou descrição…"
-              aria-label="Buscar questionários"
+              placeholder="Search by title, topic, or description…"
+              aria-label="Search questionnaires"
             />
           </label>
 
           <span class="count">
             {{ filtered.length }}
-            {{ filtered.length === 1 ? 'questionário' : 'questionários' }}
+            {{ filtered.length === 1 ? 'questionnaire' : 'questionnaires' }}
           </span>
 
         </div>
@@ -173,8 +172,8 @@ const openDetails = (id: number | string) => {
 
         <!-- ERROR -->
         <div v-else-if="status === 'error'" class="state">
-          <p>Não foi possível carregar os questionários.</p>
-          <button class="retry" @click="load">Tentar novamente</button>
+          <p>Could not load the questionnaires.</p>
+          <button class="retry" @click="load">Try again</button>
         </div>
 
         <!-- EMPTY (nenhum cadastrado) -->
@@ -182,16 +181,16 @@ const openDetails = (id: number | string) => {
           v-else-if="questionnaires.length === 0"
           class="state"
         >
-          <p>Ainda não há questionários prontos.</p>
+          <p>No questionnaires are available yet.</p>
           <a class="link" href="/quiz/novo" @click.prevent="router.push('/quiz/novo')">
-            Criar um novo experimento
+            Create a new experiment
           </a>
         </div>
 
         <!-- EMPTY (busca sem resultado) -->
         <div v-else-if="filtered.length === 0" class="state">
-          <p>Nenhum questionário encontrado para “{{ search }}”.</p>
-          <button class="retry" @click="search = ''">Limpar busca</button>
+          <p>No questionnaires found for “{{ search }}”.</p>
+          <button class="retry" @click="search = ''">Clear search</button>
         </div>
 
         <!-- LIST -->
@@ -203,7 +202,7 @@ const openDetails = (id: number | string) => {
             class="card"
             tabindex="0"
             role="link"
-            :aria-label="`Ver detalhes de ${q.title}`"
+            :aria-label="`View details for ${q.title}`"
             @click="openDetails(q.id)"
             @keydown.enter="openDetails(q.id)"
           >
@@ -222,13 +221,13 @@ const openDetails = (id: number | string) => {
             <p>{{ q.description }}</p>
 
             <ul class="meta">
-              <li>{{ q.questionCount }} perguntas</li>
-              <li>Humano + IA</li>
+              <li>{{ q.questionCount }} questions</li>
+              <li>Human + AI</li>
               <li>{{ formatDate(q.createdAt) }}</li>
             </ul>
 
             <span class="card-action">
-              Ver detalhes <span aria-hidden="true">→</span>
+              View details <span aria-hidden="true">→</span>
             </span>
 
           </article>

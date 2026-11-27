@@ -31,7 +31,7 @@ const scrollToSection = (id: string) => {
       <a href="/" class="brand">
         <img
           src="../assets/eliza-logo.png"
-          alt="Logo ELIZA"
+          alt="ELIZA logo"
           class="brand-logo"
         />
         <span>ELIZA</span>
@@ -39,11 +39,11 @@ const scrollToSection = (id: string) => {
 
       <nav class="navigation">
         <a href="/">Home</a>
-        <a href="/sobre" class="active">Sobre</a>
+        <a href="/about" class="active">About</a>
       </nav>
 
       <button class="header-button" @click="startQuiz">
-        Começar experimento
+        Start the experiment
         <span>→</span>
       </button>
     </header>
@@ -54,31 +54,27 @@ const scrollToSection = (id: string) => {
 
         <div class="hero-text">
           <span class="eyebrow">
-            SOBRE O PROJETO
+            ABOUT THE PROJECT
           </span>
 
           <h1>
-            Afinal, o que nos faz
-            <span>parecer humanos?</span>
+            What makes us
+            <span>sound human?</span>
           </h1>
 
           <p>
-            O ELIZA é um experimento interativo que investiga
-            como percebemos a comunicação humana e as respostas
-            produzidas por inteligência artificial.
+            ELIZA is an interactive experiment that explores how we perceive human communication and AI-generated responses.
           </p>
 
           <p>
-            Aqui, você assume o papel de juiz e coloca sua própria
-            percepção à prova: será que consegue identificar
-            quem está por trás de cada resposta?
+            You take on the role of judge. Can you tell who wrote each response?
           </p>
 
           <button
             class="primary-button"
             @click="scrollToSection('como-funciona')"
           >
-            Descubra como funciona
+            See how it works
             <span>↓</span>
           </button>
         </div>
@@ -87,7 +83,7 @@ const scrollToSection = (id: string) => {
           <div class="logo-glow">
             <img
               src="../assets/eliza-logo.png"
-              alt="Símbolo do ELIZA"
+              alt="ELIZA symbol"
               class="hero-logo"
             />
           </div>
@@ -100,8 +96,8 @@ const scrollToSection = (id: string) => {
       </div>
 
       <div class="hero-bottom">
-        <span>UMA EXPERIÊNCIA SOBRE A PERCEPÇÃO HUMANA</span>
-        <span>SCROLL PARA EXPLORAR ↓</span>
+        <span>AN EXPERIMENT ABOUT HUMAN PERCEPTION</span>
+        <span>SCROLL TO EXPLORE ↓</span>
       </div>
     </section>
 
@@ -109,29 +105,21 @@ const scrollToSection = (id: string) => {
     <section class="introduction section-container">
 
       <div class="section-heading">
-        <span class="eyebrow">01 — A PROPOSTA</span>
+        <span class="eyebrow">01 — THE CONCEPT</span>
 
         <h2>
-          Mais do que identificar respostas,
-          <span>questionar percepções.</span>
+          More than identifying responses,
+          <span>questioning perceptions.</span>
         </h2>
       </div>
 
       <div class="introduction-content">
         <p>
-          Com o avanço da inteligência artificial, textos e
-          respostas produzidos por máquinas estão cada vez mais
-          presentes no nosso cotidiano. Muitas vezes, essas
-          respostas podem apresentar características semelhantes
-          às da comunicação humana.
+          AI-generated text is becoming more common in everyday life. Its style can resemble the way people communicate.
         </p>
 
         <p>
-          Mas até que ponto conseguimos perceber a diferença?
-          O ELIZA propõe uma experiência em que você precisa
-          observar, interpretar e decidir qual resposta acredita
-          ter sido escrita por uma pessoa e qual foi produzida
-          por uma inteligência artificial.
+          How well can we tell the difference? In ELIZA, you compare responses and decide which one you think a person wrote and which one AI generated.
         </p>
       </div>
 
@@ -158,24 +146,19 @@ const scrollToSection = (id: string) => {
       </div>
 
       <div class="objective-content">
-        <span class="eyebrow">02 — NOSSO OBJETIVO</span>
+        <span class="eyebrow">02 — OUR OBJECTIVE</span>
 
         <h2>
-          Onde termina a
-          <span>percepção?</span>
+          Where does
+          <span>perception end?</span>
         </h2>
 
         <p>
-          O objetivo do ELIZA é explorar a capacidade humana
-          de distinguir respostas humanas das produzidas por IA,
-          observando como linguagem, contexto e interpretação
-          influenciam nossas decisões.
+          ELIZA explores how people distinguish human responses from AI-generated ones and how language, context, and interpretation shape their decisions.
         </p>
 
         <p>
-          Não buscamos provar que uma máquina pensa ou sente
-          como um ser humano. Queremos investigar como as pessoas
-          percebem essa semelhança durante uma interação.
+          We study which features of a response make it feel human to a reader.
         </p>
       </div>
 
@@ -187,16 +170,15 @@ const scrollToSection = (id: string) => {
       <div class="section-container">
 
         <div class="section-heading centered">
-          <span class="eyebrow">03 — COMO FUNCIONA</span>
+          <span class="eyebrow">03 — HOW IT WORKS</span>
 
           <h2>
-            Três etapas.
-            <span>Uma decisão.</span>
+            Three steps.
+            <span>One decision.</span>
           </h2>
 
           <p>
-            Sua missão é analisar as respostas e descobrir
-            qual delas foi produzida por um humano.
+            Read the responses and decide which one a person wrote.
           </p>
         </div>
 
@@ -209,15 +191,14 @@ const scrollToSection = (id: string) => {
               <span>✎</span>
             </div>
 
-            <h3>Respostas</h3>
+            <h3>Responses</h3>
 
             <p>
-              Perguntas são apresentadas e respondidas por
-              uma pessoa e por uma inteligência artificial.
+              A person and an AI answer the same questions.
             </p>
 
             <span class="step-caption">
-              COLETA DE RESPOSTAS
+              RESPONSE COLLECTION
             </span>
           </article>
 
@@ -230,15 +211,14 @@ const scrollToSection = (id: string) => {
               <span>◉</span>
             </div>
 
-            <h3>Julgamento</h3>
+            <h3>Judgment</h3>
 
             <p>
-              Você analisa duas respostas anônimas e escolhe
-              qual acredita ser humana e qual acredita ser de IA.
+              Read two anonymous responses and choose the one you think a person wrote.
             </p>
 
             <span class="step-caption">
-              ANÁLISE E DECISÃO
+              ANALYSIS AND DECISION
             </span>
           </article>
 
@@ -251,15 +231,14 @@ const scrollToSection = (id: string) => {
               <span>⌁</span>
             </div>
 
-            <h3>Resultado</h3>
+            <h3>Results</h3>
 
             <p>
-              Ao final, suas escolhas são comparadas com as
-              respostas originais e você descobre seu desempenho.
+              See who wrote each response and how many you identified correctly.
             </p>
 
             <span class="step-caption">
-              RESULTADO FINAL
+              FINAL RESULTS
             </span>
           </article>
 
@@ -271,16 +250,15 @@ const scrollToSection = (id: string) => {
     <section class="modes section-container">
 
       <div class="section-heading">
-        <span class="eyebrow">04 — ESCOLHA SUA EXPERIÊNCIA</span>
+        <span class="eyebrow">04 — CHOOSE YOUR EXPERIENCE</span>
 
         <h2>
-          Duas maneiras de
-          <span>participar.</span>
+          Two ways to
+          <span>take part.</span>
         </h2>
 
         <p>
-          Você pode construir um experimento completo ou
-          começar diretamente pelo julgamento.
+          Run the full experiment or skip straight to judging.
         </p>
       </div>
 
@@ -288,61 +266,57 @@ const scrollToSection = (id: string) => {
 
         <article class="mode-card">
           <div class="mode-top">
-            <span class="mode-tag">EXPERIÊNCIA COMPLETA</span>
+            <span class="mode-tag">FULL EXPERIMENT</span>
             <span class="mode-index">01</span>
           </div>
 
           <div class="mode-icon">✧</div>
 
-          <h3>Novo experimento</h3>
+          <h3>New experiment</h3>
 
           <p>
-            Comece do zero. As perguntas serão respondidas
-            por um humano e por uma IA. Depois, você assume
-            o papel de juiz e analisa todas as respostas.
+            Start from scratch. A person and an AI answer the questions. Then you review both sets of responses as the judge.
           </p>
 
           <ul>
-            <li>Responder às perguntas</li>
-            <li>Gerar respostas da IA</li>
-            <li>Realizar o julgamento</li>
-            <li>Conferir o resultado</li>
+            <li>Answer the questions</li>
+            <li>Generate AI responses</li>
+            <li>Make your judgments</li>
+            <li>Check your results</li>
           </ul>
 
           <button class="mode-button" @click="startQuiz">
-            Começar do zero
+            Start from scratch
             <span>→</span>
           </button>
         </article>
 
         <article class="mode-card featured">
           <div class="mode-top">
-            <span class="mode-tag">MAIS RÁPIDO</span>
+            <span class="mode-tag">QUICKER OPTION</span>
             <span class="mode-index">02</span>
           </div>
 
           <div class="mode-icon">◈</div>
 
-          <h3>Questionários prontos</h3>
+          <h3>Ready-made questionnaires</h3>
 
           <p>
-            Escolha um questionário que já possui respostas
-            humanas e de IA. Você não precisa passar pela
-            etapa de perguntas: pode ir direto ao julgamento.
+            Choose a questionnaire with existing human and AI responses and go straight to judging.
           </p>
 
           <ul>
-            <li>Perguntas já cadastradas</li>
-            <li>Respostas previamente coletadas</li>
-            <li>Julgamento imediato</li>
-            <li>Resultado ao finalizar</li>
+            <li>Predefined questions</li>
+            <li>Previously collected responses</li>
+            <li>Judge right away</li>
+            <li>See results when you finish</li>
           </ul>
 
           <button
             class="mode-button"
             @click="$router.push('/questionarios')"
           >
-            Explorar questionários
+            Explore questionnaires
             <span>→</span>
           </button>
         </article>
@@ -354,31 +328,23 @@ const scrollToSection = (id: string) => {
     <section class="inspiration">
 
       <div class="inspiration-content">
-        <span class="eyebrow">05 — NOSSA INSPIRAÇÃO</span>
+        <span class="eyebrow">05 — OUR INSPIRATION</span>
 
         <h2>
-          Uma homenagem à história da
-          <span>interação entre humanos e máquinas.</span>
+          A tribute to the history of
+          <span>human–machine interaction.</span>
         </h2>
 
         <p>
-          O nome ELIZA faz referência ao programa desenvolvido
-          por Joseph Weizenbaum no MIT, na década de 1960.
-          Considerado um dos primeiros programas de conversação,
-          ele simulava diálogos por meio de padrões e regras
-          de linguagem.
+          ELIZA takes its name from the program Joseph Weizenbaum developed at MIT in the 1960s. One of the first chatbots, it used language patterns and rules to simulate dialogue.
         </p>
 
         <p>
-          A experiência original levantou uma questão que continua
-          relevante: por que atribuímos características humanas
-          a sistemas que se comunicam conosco?
+          The original experiment raised a question that still matters today. Why do we attribute human qualities to systems that communicate with us?
         </p>
 
         <p>
-          Inspirado por essa reflexão, nosso projeto propõe
-          uma nova perspectiva sobre a relação entre linguagem,
-          percepção e inteligência artificial.
+          That question inspired our project on language, perception, and artificial intelligence.
         </p>
 
         <a
@@ -387,7 +353,7 @@ const scrollToSection = (id: string) => {
           rel="noopener noreferrer"
           class="inspiration-link"
         >
-          Conheça a história do ELIZA original ↗
+          Read about the original ELIZA ↗
         </a>
       </div>
 
@@ -397,27 +363,26 @@ const scrollToSection = (id: string) => {
           alt=""
         />
         <span>ELIZA</span>
-        <small>1966 — PRESENTE</small>
+        <small>1966 — PRESENT</small>
       </div>
 
     </section>
 
     <!-- FINAL CTA -->
     <section class="final-cta">
-      <span class="eyebrow">SUA PERCEPÇÃO SERÁ COLOCADA À PROVA</span>
+      <span class="eyebrow">PUT YOUR PERCEPTION TO THE TEST</span>
 
       <h2>
-        Você está pronto para
-        <span>julgar?</span>
+        Are you ready to
+        <span>make your judgment?</span>
       </h2>
 
       <p>
-        Descubra se consegue distinguir a comunicação humana
-        da inteligência artificial.
+        Find out whether you can tell human writing from AI-generated writing.
       </p>
 
       <button class="primary-button" @click="startQuiz">
-        Iniciar experiência
+        Start the experiment
         <span>→</span>
       </button>
     </section>
@@ -427,10 +392,10 @@ const scrollToSection = (id: string) => {
       <a href="/" class="footer-brand">ELIZA</a>
 
       <span>
-        Um experimento sobre percepção humana e inteligência artificial.
+        An experiment about human perception and artificial intelligence.
       </span>
 
-      <a href="/">Voltar ao início ↑</a>
+      <a href="/">Back to top ↑</a>
     </footer>
 
   </main>

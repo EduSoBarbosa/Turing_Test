@@ -10,13 +10,13 @@ defineProps<{
     <RouterLink to="/" class="sb-brand">
       <img
         src="../assets/eliza-logo.png"
-        alt="Logo ELIZA"
+        alt="ELIZA logo"
         class="sb-logo"
       />
       <span class="sb-name">ELIZA</span>
     </RouterLink>
 
-    <span class="sb-label">EXPERIMENTO</span>
+    <span class="sb-label">EXPERIMENT</span>
 
     <nav class="sb-nav">
 
@@ -29,7 +29,7 @@ defineProps<{
           <circle cx="12" cy="12" r="9" />
           <path d="M12 3v18M3 12h18" />
         </svg>
-        Novo experimento
+        New experiment
       </RouterLink>
 
       <RouterLink
@@ -41,7 +41,7 @@ defineProps<{
           <rect x="4" y="4" width="16" height="16" rx="3" />
           <path d="M8 9h8M8 13h8M8 17h5" />
         </svg>
-        Questionários
+        Questionnaires
       </RouterLink>
 
     </nav>
@@ -50,7 +50,7 @@ defineProps<{
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M3 12l9-9 9 9M5 10v10h14V10" />
       </svg>
-      Voltar à landing
+      Back to home
     </RouterLink>
 
   </aside>

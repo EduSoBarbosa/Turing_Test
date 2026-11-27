@@ -31,9 +31,9 @@ interface StoredJudgment {
 ======================================== */
 
 const JUDGMENT_KEY = 'eliza:judgment' // ordem A/B + escolhas (a tela de resultado lê daqui)
-const QUIZ_KEY = 'eliza:quiz' //          respostas vindas de "Novo experimento"
+const QUIZ_KEY = 'eliza:quiz' //          respostas vindas de "New experiment"
 
-const steps = ['Escolha', 'Respostas', 'Julgamento', 'Resultado']
+const steps = ['Choose', 'Responses', 'Judgment', 'Results']
 const currentStep = 2
 
 /* ========================================
@@ -42,7 +42,7 @@ const currentStep = 2
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
-// Usada no caminho "Questionários prontos" (?questionario=ID)
+// Usada no caminho "Ready-made questionnaires" (?questionario=ID)
 async function fetchJudgmentSet(id: string): Promise<RawItem[]> {
   // TODO: troque pela sua API
   // const res = await fetch(`/api/questionnaires/${id}/judgment`)
@@ -51,23 +51,23 @@ async function fetchJudgmentSet(id: string): Promise<RawItem[]> {
   await sleep(600)
 
   const questions = [
-    'Qual é uma lembrança da sua infância que você nunca esqueceu?',
-    'Como você reage quando alguém discorda de você?',
-    'Descreva um dia em que você ficou muito frustrado(a).',
-    'O que te faz sentir mais em paz?',
-    'Qual foi a última vez que você mudou de opinião sobre algo importante?',
-    'Qual é o seu maior medo e por quê?',
-    'Conte sobre uma pessoa que marcou a sua vida.',
-    'O que você faria se tivesse um dia livre sem nenhuma obrigação?',
-    'Qual foi o melhor conselho que você já recebeu?',
-    'Como você imagina a sua vida daqui a dez anos?'
+    'What is a childhood memory that has stayed with you?',
+    'How do you react when someone disagrees with you?',
+    'Describe a day when you felt really frustrated.',
+    'What makes you feel most at peace?',
+    'When was the last time you changed your mind about something important?',
+    'What is your biggest fear, and why?',
+    'Tell us about someone who made a lasting impression on you.',
+    'What would you do with a day off and no obligations?',
+    'What is the best advice you have ever received?',
+    'How do you imagine your life ten years from now?'
   ]
 
   return questions.map((question, index) => ({
     questionId: index + 1,
     question,
-    human: `Resposta humana simulada ${index + 1} (questionário ${id}).`,
-    ai: `Resposta da IA simulada ${index + 1} (questionário ${id}).`
+    human: `Simulated human response ${index + 1} (questionnaire ${id}).`,
+    ai: `Simulated AI response ${index + 1} (questionnaire ${id}).`
   }))
 }
 
@@ -277,7 +277,7 @@ onBeforeUnmount(() => {
       <div class="brand">
         <img
           src="../assets/eliza-logo.png"
-          alt="Logo ELIZA"
+          alt="ELIZA logo"
           class="brand-logo"
         />
         <span class="brand-name">ELIZA</span>
@@ -301,8 +301,8 @@ onBeforeUnmount(() => {
       </ol>
 
       <button class="exit" @click="showExitModal = true">
-        Sair
-      </button>
+          Leave
+</button>
 
     </header>
 
@@ -311,21 +311,21 @@ onBeforeUnmount(() => {
       <!-- LOADING -->
       <div v-if="status === 'loading'" class="state" role="status">
         <span class="spinner" aria-hidden="true" />
-        Preparando o julgamento…
+        Preparing the judgment…
       </div>
 
       <!-- EMPTY -->
       <div v-else-if="status === 'empty'" class="state column">
-        <p>Nenhum julgamento em andamento.</p>
+        <p>No judgment is in progress.</p>
         <button class="outline" @click="router.push('/quiz')">
-          Escolher um experimento
+          Choose an experiment
         </button>
       </div>
 
       <!-- ERROR -->
       <div v-else-if="status === 'error'" class="state column">
-        <p>Não foi possível carregar o julgamento.</p>
-        <button class="outline" @click="load">Tentar novamente</button>
+        <p>Could not load the judgment.</p>
+        <button class="outline" @click="load">Try again</button>
       </div>
 
       <!-- READY -->
@@ -336,11 +336,11 @@ onBeforeUnmount(() => {
 
           <div class="progress-info">
             <span class="eyebrow">
-              PERGUNTA {{ String(currentIndex + 1).padStart(2, '0') }}
-              DE {{ String(total).padStart(2, '0') }}
+              QUESTION {{ String(currentIndex + 1).padStart(2, '0') }}
+              OF {{ String(total).padStart(2, '0') }}
             </span>
             <span class="answered">
-              {{ answeredCount }}/{{ total }} julgadas
+              {{ answeredCount }}/{{ total }} judged
             </span>
           </div>
 
@@ -360,15 +360,15 @@ onBeforeUnmount(() => {
         <h1>{{ current.question }}</h1>
 
         <p class="instruction">
-          Uma destas respostas foi escrita por um humano e a outra por uma IA.
-          <strong>Qual é a do humano?</strong>
+          A person wrote one response and an AI generated the other.
+          <strong>Which response did the person write?</strong>
         </p>
 
         <!-- ANSWERS -->
         <div
           class="answers"
           role="radiogroup"
-          aria-label="Qual resposta foi escrita por um humano?"
+          aria-label="Which response did the person write?"
         >
 
           <button
@@ -382,7 +382,7 @@ onBeforeUnmount(() => {
           >
 
             <div class="answer-head">
-              <span class="answer-label">RESPOSTA {{ label }}</span>
+              <span class="answer-label">RESPONSE {{ label }}</span>
               <kbd>{{ label }}</kbd>
             </div>
 
@@ -390,10 +390,10 @@ onBeforeUnmount(() => {
 
             <div class="answer-foot">
               <span v-if="selected === label" class="picked">
-                ✓ Marcada como humana
+                ✓ Selected as human
               </span>
               <span v-else class="pick-hint">
-                Clique para marcar como humana
+                Select as human
               </span>
             </div>
 
@@ -402,7 +402,7 @@ onBeforeUnmount(() => {
         </div>
 
         <!-- QUESTION DOTS -->
-        <nav class="dots" aria-label="Navegar entre as perguntas">
+        <nav class="dots" aria-label="Navigate between questions">
           <button
             v-for="(item, index) in items"
             :key="item.questionId"
@@ -411,7 +411,7 @@ onBeforeUnmount(() => {
               current: index === currentIndex,
               answered: choices[item.questionId]
             }"
-            :aria-label="`Ir para a pergunta ${index + 1}`"
+            :aria-label="`Go to question ${index + 1}`"
             :aria-current="index === currentIndex ? 'step' : undefined"
             @click="goTo(index)"
           >
@@ -431,15 +431,15 @@ onBeforeUnmount(() => {
         :disabled="currentIndex === 0"
         @click="prev"
       >
-        <span aria-hidden="true">←</span> Anterior
+        <span aria-hidden="true">←</span> Previous
       </button>
 
       <div class="action-status" :class="{ ready: allAnswered }">
         <span class="status-dot" aria-hidden="true" />
         {{
           allAnswered
-            ? 'Tudo julgado! Você já pode finalizar.'
-            : `Faltam ${total - answeredCount} para julgar`
+            ? 'All responses judged. You can finish now.'
+            : `${total - answeredCount} left to judge`
         }}
       </div>
 
@@ -448,17 +448,17 @@ onBeforeUnmount(() => {
         class="primary"
         @click="next"
       >
-        Próxima <span aria-hidden="true">→</span>
+        Next <span aria-hidden="true">→</span>
       </button>
 
       <button
         v-else
         class="primary"
         :disabled="!allAnswered"
-        :title="allAnswered ? '' : 'Julgue todas as perguntas para finalizar'"
+        :title="allAnswered ? '' : 'Judge every question to finish'"
         @click="finish"
       >
-        Revisar e finalizar <span aria-hidden="true">→</span>
+        Review and submit <span aria-hidden="true">→</span>
       </button>
 
     </footer>
@@ -475,19 +475,18 @@ onBeforeUnmount(() => {
         aria-modal="true"
         aria-labelledby="exit-title"
       >
-        <h2 id="exit-title">Sair do julgamento?</h2>
+        <h2 id="exit-title">Leave this judgment?</h2>
 
         <p>
-          Se você sair agora, perde o progresso deste julgamento
-          e volta para a escolha do experimento.
+          Leaving clears your progress and takes you back to the experiment selection.
         </p>
 
         <div class="modal-actions">
           <button class="ghost" @click="showExitModal = false">
-            Continuar julgando
+            Keep judging
           </button>
           <button class="danger" @click="exitJudgment">
-            Sair mesmo assim
+            Leave anyway
           </button>
         </div>
       </div>

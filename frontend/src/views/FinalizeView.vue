@@ -29,7 +29,7 @@ interface StoredJudgment {
 const JUDGMENT_KEY = 'eliza:judgment'
 const FINALIZED_KEY = 'eliza:finalized'
 
-const steps = ['Escolha', 'Respostas', 'Julgamento', 'Resultado']
+const steps = ['Choose', 'Responses', 'Judgment', 'Results']
 const currentStep = 2
 
 /* ========================================
@@ -168,7 +168,7 @@ async function finalize() {
       <div class="brand">
         <img
           src="../assets/eliza-logo.png"
-          alt="Logo ELIZA"
+          alt="ELIZA logo"
           class="brand-logo"
         />
         <span class="brand-name">ELIZA</span>
@@ -200,27 +200,26 @@ async function finalize() {
       <!-- LOADING -->
       <div v-if="status === 'loading'" class="state" role="status">
         <span class="spinner" aria-hidden="true" />
-        Carregando…
+        Loading…
       </div>
 
       <!-- EMPTY -->
       <div v-else-if="status === 'empty'" class="state column">
-        <p>Nenhum julgamento para finalizar.</p>
+        <p>There is no judgment to submit.</p>
         <button class="outline" @click="router.push('/quiz')">
-          Escolher um experimento
+          Choose an experiment
         </button>
       </div>
 
       <!-- READY -->
       <template v-else>
 
-        <span class="eyebrow">CONFIRMAÇÃO</span>
+        <span class="eyebrow">CONFIRMATION</span>
 
-        <h1>Revise antes de finalizar</h1>
+        <h1>Review before submitting</h1>
 
         <p class="lead">
-          Confira o que você marcou como resposta humana em cada pergunta.
-          Depois de finalizar, não será possível alterar o julgamento.
+          Review which response you marked as human for each question. Your choices are final once submitted.
         </p>
 
         <div class="layout">
@@ -245,14 +244,14 @@ async function finalize() {
 
                 <template v-if="choices[item.questionId]">
                   <span class="picked">
-                    ✓ Humana: Resposta {{ choices[item.questionId] }}
+                    ✓ Human: Response {{ choices[item.questionId] }}
                   </span>
 
                   <p class="preview">{{ pickedText(item) }}</p>
                 </template>
 
                 <span v-else class="unanswered">
-                  Sem julgamento
+                  Not judged
                 </span>
 
               </div>
@@ -262,7 +261,7 @@ async function finalize() {
                 :class="{ urgent: !choices[item.questionId] }"
                 @click="backToJudgment(index)"
               >
-                {{ choices[item.questionId] ? 'Alterar' : 'Julgar' }}
+                {{ choices[item.questionId] ? 'Change' : 'Judge' }}
               </button>
 
             </li>
@@ -272,12 +271,12 @@ async function finalize() {
           <!-- SUMMARY -->
           <aside class="summary">
 
-            <h3>Resumo</h3>
+            <h3>Summary</h3>
 
             <div class="meter">
               <div class="meter-numbers">
                 <strong>{{ answeredCount }}</strong>
-                <span>de {{ total }} julgadas</span>
+                <span>of {{ total }} judged</span>
               </div>
 
               <div class="bar">
@@ -289,25 +288,24 @@ async function finalize() {
             </div>
 
             <div v-if="isComplete" class="notice warning">
-              <b>Atenção</b>
+              <b>Final submission</b>
               <span>
-                Ao finalizar, suas escolhas serão enviadas e você não poderá
-                mais alterá-las.
+                Submitting locks in your choices.
               </span>
             </div>
 
             <div v-else class="notice missing-notice">
               <b>
                 {{ missingCount }}
-                {{ missingCount === 1 ? 'pergunta sem julgamento' : 'perguntas sem julgamento' }}
+                {{ missingCount === 1 ? 'question still to judge' : 'questions still to judge' }}
               </b>
               <span>
-                Volte e julgue todas para poder finalizar.
+                Go back and judge every question before submitting.
               </span>
             </div>
 
             <p v-if="submitError" class="error" role="alert">
-              Não foi possível enviar agora. Tente novamente.
+              Could not submit your choices. Please try again.
             </p>
 
             <button
@@ -317,10 +315,10 @@ async function finalize() {
             >
               <template v-if="submitting">
                 <span class="spinner small" aria-hidden="true" />
-                Enviando…
+                Submitting…
               </template>
               <template v-else>
-                Finalizar e ver resultado
+                Submit and see results
                 <span aria-hidden="true">→</span>
               </template>
             </button>
@@ -330,7 +328,7 @@ async function finalize() {
               :disabled="submitting"
               @click="backToJudgment()"
             >
-              <span aria-hidden="true">←</span> Voltar ao julgamento
+              <span aria-hidden="true">←</span> Back to judging
             </button>
 
           </aside>
