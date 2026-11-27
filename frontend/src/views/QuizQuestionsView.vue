@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { questionnaire as sampleQuestions } from '@/lib/questionnaire'
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import AppSidebar from '@/components/AppSidebar.vue'
@@ -46,33 +47,13 @@ async function fetchQuestions(): Promise<Question[]> {
 
   await sleep(600)
 
-  return [
-    { id: 1, text: 'What is a childhood memory that has stayed with you?' },
-    { id: 2, text: 'How do you react when someone disagrees with you?' },
-    { id: 3, text: 'Describe a day when you felt really frustrated.' },
-    { id: 4, text: 'What makes you feel most at peace?' },
-    { id: 5, text: 'When was the last time you changed your mind about something important?' },
-    { id: 6, text: 'What is your biggest fear, and why?' },
-    { id: 7, text: 'Tell us about someone who made a lasting impression on you.' },
-    { id: 8, text: 'What would you do with a day off and no obligations?' },
-    { id: 9, text: 'What is the best advice you have ever received?' },
-    { id: 10, text: 'How do you imagine your life ten years from now?' }
-  ]
+  return sampleQuestions
 }
 
 async function fetchAiAnswer(question: Question): Promise<string> {
-  // TODO: troque pela sua API
-  // const res = await fetch('/api/ai-answer', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ questionId: question.id })
-  // })
-  // const data = await res.json()
-  // return data.answer
-
-  await sleep(2000 + Math.random() * 5000)
-
-  return `Simulated AI response to: "${question.text}"`
+  const answer = sampleQuestions.find(({ id }) => id === question.id)
+  if (!answer) throw new Error('No scripted response for this question.')
+  return answer.ai
 }
 
 /* ========================================

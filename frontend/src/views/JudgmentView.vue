@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { questionnaire as sampleQuestions } from '@/lib/questionnaire'
 import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -43,31 +44,13 @@ const currentStep = 2
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 // Usada no caminho "Ready-made questionnaires" (?questionario=ID)
-async function fetchJudgmentSet(id: string): Promise<RawItem[]> {
-  // TODO: troque pela sua API
-  // const res = await fetch(`/api/questionnaires/${id}/judgment`)
-  // return await res.json()
-
+async function fetchJudgmentSet(): Promise<RawItem[]> {
   await sleep(600)
-
-  const questions = [
-    'What is a childhood memory that has stayed with you?',
-    'How do you react when someone disagrees with you?',
-    'Describe a day when you felt really frustrated.',
-    'What makes you feel most at peace?',
-    'When was the last time you changed your mind about something important?',
-    'What is your biggest fear, and why?',
-    'Tell us about someone who made a lasting impression on you.',
-    'What would you do with a day off and no obligations?',
-    'What is the best advice you have ever received?',
-    'How do you imagine your life ten years from now?'
-  ]
-
-  return questions.map((question, index) => ({
-    questionId: index + 1,
-    question,
-    human: `Simulated human response ${index + 1} (questionnaire ${id}).`,
-    ai: `Simulated AI response ${index + 1} (questionnaire ${id}).`
+  return sampleQuestions.map(({ id, text, sampleHuman, ai }) => ({
+    questionId: id,
+    question: text,
+    human: sampleHuman,
+    ai,
   }))
 }
 
@@ -161,7 +144,7 @@ async function load() {
       const stored = sessionStorage.getItem(QUIZ_KEY)
       raw = stored ? (JSON.parse(stored) as RawItem[]) : []
     } else {
-      raw = await fetchJudgmentSet(source.value)
+      raw = await fetchJudgmentSet()
     }
 
     if (!raw.length) {

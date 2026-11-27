@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { questionnaire as sampleQuestions } from '@/lib/questionnaire'
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppSidebar from '@/components/AppSidebar.vue'
@@ -48,18 +49,7 @@ async function fetchQuestionnaire(
       'Questions about memories, feelings, and personal experiences. Each question has one response from a person and one from AI.',
     theme: 'Emotions',
     createdAt: '2026-11-10',
-    questions: [
-      { id: 1, text: 'What is a childhood memory that has stayed with you?' },
-      { id: 2, text: 'How do you react when someone disagrees with you?' },
-      { id: 3, text: 'Describe a day when you felt really frustrated.' },
-      { id: 4, text: 'What makes you feel most at peace?' },
-      { id: 5, text: 'When was the last time you changed your mind about something important?' },
-      { id: 6, text: 'What is your biggest fear, and why?' },
-      { id: 7, text: 'Tell us about someone who made a lasting impression on you.' },
-      { id: 8, text: 'What would you do with a day off and no obligations?' },
-      { id: 9, text: 'What is the best advice you have ever received?' },
-      { id: 10, text: 'How do you imagine your life ten years from now?' }
-    ]
+    questions: sampleQuestions.map(({ id, text }) => ({ id, text })),
   }
 }
 
