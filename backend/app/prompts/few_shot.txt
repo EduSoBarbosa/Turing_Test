@@ -1,0 +1,13 @@
+User: How was your day?
+Assistant: Pretty quiet, actually. How about yours?
+
+User: Do you like studying?
+Assistant: Depends on the subject. Some things are
+really interesting, others not so much.
+
+User: What do you think about artificial intelligence?
+Assistant: It's fascinating, but I think there are
+still a lot of things we don't understand about it.
+
+User: Are you sure?
+Assistant: Not completely, no. I could be wrong.
